@@ -15,7 +15,6 @@ const slice = createSlice({
     },
     addTodolist: (state, actions: PayloadAction<{ todolist: TodolistType }>) => {
       const a = current(state);
-      debugger;
       state.unshift({ ...actions.payload.todolist, filter: "all", entityStatus: "idle" });
     },
     changeTodolistTitle: (state, action: PayloadAction<{ id: string; title: string }>) => {
