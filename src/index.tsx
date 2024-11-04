@@ -1,18 +1,53 @@
-// import React from 'react';
-// import { createRoot } from 'react-dom/client';
-// import './index.css';
-// import App from './app/App';
-// import { store } from './app/store';
-// import { Provider } from 'react-redux';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import App from './app/App';
+import { store } from './app/store';
+import { Provider } from 'react-redux';
+
+
+
+const root = createRoot(document.getElementById('root') as HTMLElement);
+root.render(
+	<Provider store={store}>
+		<App/>
+	</Provider>
+);
+
+
+// import React from 'react'
+// import ReactDOM from 'react-dom/client';
+//
+// export const App = () => {
+//     return (
+//         <div>
+//             <h2>Для чего надо добавлять файлы в .gitignore ?</h2>
+//             <ul>
+//                 <li>1 - Чтобы git удалял их историю, храня только последнюю версию</li>
+//                 <li>2 - Чтобы git при работе с этими файлам уведомлял при их изменении</li>
+//                 <li>3 - Чтобы git не следил за изменениями в данных файлах</li>
+//                 <li>4 - Файл .gitignore не несет никакой смысловой нагрузки, т.к. все файлы с которыми мы работаем должны
+//                     отслеживаться. Соответственно никакие файлы в .gitignore добавлять не нужно
+//                 </li>
+//                 <li>5 - Нет правильного ответа</li>
+//             </ul>
+//         </div>
+//     )
+// }
 //
 //
-//
-// const root = createRoot(document.getElementById('root') as HTMLElement);
-// root.render(
-// 	<Provider store={store}>
-// 		<App/>
-// 	</Provider>
-// );
+// const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+// root.render(<App/>);
+///3
+// 📜 Описание:
+// Для чего надо добавлять файлы в .gitignore ?
+// Может быть несколько вариантов ответа (ответ дайте через пробел).
+// ❗ Ответ будет засчитан как верный, только при полном правильном совпадении.
+// Если указали правильно один вариант (1),
+// а нужно было указать два варианта (1 и 2), то ответ в данном случае будет засчитан как неправильный
+
+// 🖥 Пример ответа: 1
+
 // import React from 'react'
 // import ReactDOM from 'react-dom/client';
 //
@@ -26,7 +61,7 @@
 //
 // const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 // root.render(<App/>);
-//git checkout branch login
+//git checkout -b login
 // 📜 Описание:
 // Что нужно прописать в консоли, чтобы создать новую ветку с названием login и перейти на нее ?
 //❗Ответ написать одной командой
@@ -42,8 +77,11 @@
 //     useEffect(() => {
 //         setInterval(() => {
 //
-//             let prevState=btc;
-//             setBtc(prevState)
+//            // let prevState=btc;
+//             setBtc((prevState)=>{
+//                 return prevState+1
+//             })
+//             //console.log(btc)
 //             // ❗❗❗ XXX ❗❗❗
 //         }, 1000)
 //     }, [])
@@ -130,8 +168,9 @@
 //             dispatch(setIsLoggedIn(true));
 //         })
 //         .finally(() => {
-//             dispatch(setLoading(false));
 //             dispatch(setIsInitialized(true));
+//             dispatch(setLoading(false));
+//
 //         });
 // };
 //
@@ -226,7 +265,7 @@
 //
 //     useEffect( ()=> {
 //         if (params.bonus) {
-//             setBalance(newSum)
+//             setBalance(balance+newSum)
 //             // ❗❗❗ XXX ❗❗❗
 //         }
 //     },[] )
@@ -274,7 +313,7 @@
 //     )
 // }
 // const SecretToken = () => {
-//     const token = 'no token' // FIX
+//     const token = 'JIUzI1NiIsInR5cCI6IkpXVCJ9' // FIX
 //
 //     return (
 //         <h1>🦾 token: {token}</h1>
@@ -302,115 +341,115 @@
 
 //❗Ответ можно указывать с типизацией и без. Учтено несколько вариантов
 // 🖥 Пример ответа: const token = '123'
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes, useNavigate, useParams } from "react-router-dom";
-import React from "react";
-
-type UserType = {
-  id: number;
-  name: string;
-  avatar: string;
-  age: number;
-  address: string;
-};
-
-const users: UserType[] = [
-  {
-    id: 1,
-    name: "my Name",
-    age: 32,
-    avatar: "—ฅ/ᐠ.̫ .ᐟ\\ฅ—",
-    address: "my Address",
-  },
-  {
-    id: 2,
-    name: "John",
-    age: 22,
-    avatar: ":)",
-    address: "California",
-  },
-  {
-    id: 3,
-    name: "Mike",
-    age: 18,
-    avatar: "^._.^",
-    address: "New York",
-  },
-  {
-    id: 4,
-    name: "Emma",
-    age: 38,
-    avatar: "/ᐠ-ꞈ-ᐟ\\",
-    address: "Washington",
-  },
-];
-
-const StartPage = () => {
-  const navigate = useNavigate();
-  const friends = users.filter((u) => u.id !== 1);
-
-  const mappedFriends = friends.map((f, i) => {
-    const go = () => {
-      navigate("/friend/" + f.id);
-    };
-
-    return (
-      <div key={i} onClick={go} style={{ paddingLeft: 24, color: "blue", cursor: "pointer" }}>
-        {f.name}, {f.age}
-      </div>
-    );
-  });
-
-  return (
-    <div>
-      <h2>🙂 My profile</h2>
-      <Profile userId={1} />
-      <hr />
-      <h2>👪 Friends</h2>
-      {mappedFriends}
-    </div>
-  );
-};
-const Profile: React.FC<{ userId?: number }> = ({ userId }) => {
-  const { id } = useParams<{ id: string }>();
-  console.log(id);
-  const user = users.find((u) => u.id === +(id || userId || 0));
-  return (
-    <div>
-      <div>
-        <b>avatar</b> {user?.avatar}
-      </div>
-      <div>
-        <div>
-          <b>name</b>: {user?.name}
-        </div>
-        <div>
-          <b>age</b>: {user?.age}
-        </div>
-        <div>
-          <b>address</b>: {user?.address}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export const Friends = () => {
-  return (
-    <Routes>
-      <Route path={"/"} element={<StartPage />} />
-      <Route path={"friend*"} children element={<Profile />} />
-      <Route path={"*"} element={<div>❌404 Page Not Found❌</div>} />
-    </Routes>
-  );
-};
-
-const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
-root.render(
-  <BrowserRouter>
-    <Friends />
-  </BrowserRouter>,
-);
+// import ReactDOM from "react-dom/client";
+// import { BrowserRouter, Route, Routes, useNavigate, useParams } from "react-router-dom";
+// import React from "react";
+//
+// type UserType = {
+//   id: number;
+//   name: string;
+//   avatar: string;
+//   age: number;
+//   address: string;
+// };
+//
+// const users: UserType[] = [
+//   {
+//     id: 1,
+//     name: "my Name",
+//     age: 32,
+//     avatar: "—ฅ/ᐠ.̫ .ᐟ\\ฅ—",
+//     address: "my Address",
+//   },
+//   {
+//     id: 2,
+//     name: "John",
+//     age: 22,
+//     avatar: ":)",
+//     address: "California",
+//   },
+//   {
+//     id: 3,
+//     name: "Mike",
+//     age: 18,
+//     avatar: "^._.^",
+//     address: "New York",
+//   },
+//   {
+//     id: 4,
+//     name: "Emma",
+//     age: 38,
+//     avatar: "/ᐠ-ꞈ-ᐟ\\",
+//     address: "Washington",
+//   },
+// ];
+//
+// const StartPage = () => {
+//   const navigate = useNavigate();
+//   const friends = users.filter((u) => u.id !== 1);
+//
+//   const mappedFriends = friends.map((f, i) => {
+//     const go = () => {
+//       navigate("/friend/" + f.id);
+//     };
+//
+//     return (
+//       <div key={i} onClick={go} style={{ paddingLeft: 24, color: "blue", cursor: "pointer" }}>
+//         {f.name}, {f.age}
+//       </div>
+//     );
+//   });
+//
+//   return (
+//     <div>
+//       <h2>🙂 My profile</h2>
+//       <Profile userId={1} />
+//       <hr />
+//       <h2>👪 Friends</h2>
+//       {mappedFriends}
+//     </div>
+//   );
+// };
+// const Profile: React.FC<{ userId?: number }> = ({ userId }) => {
+//   const { id } = useParams<{ id: string }>();
+//   console.log(id);
+//   const user = users.find((u) => u.id === +(id || userId || 0));
+//   return (
+//     <div>
+//       <div>
+//         <b>avatar</b> {user?.avatar}
+//       </div>
+//       <div>
+//         <div>
+//           <b>name</b>: {user?.name}
+//         </div>
+//         <div>
+//           <b>age</b>: {user?.age}
+//         </div>
+//         <div>
+//           <b>address</b>: {user?.address}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+//
+// export const Friends = () => {
+//   return (
+//     <Routes>
+//       <Route path={"/"} element={<StartPage />} />
+//       <Route path={"friend/:id"} children element={<Profile />} />
+//       <Route path={"*"} element={<div>❌404 Page Not Found❌</div>} />
+//     </Routes>
+//   );
+// };
+//
+// const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+// root.render(
+//   <BrowserRouter>
+//     <Friends />
+//   </BrowserRouter>,
+// );
 
 // 📜 Описание:
 // При загрузке приложения на экране отображается
@@ -421,4 +460,4 @@ root.render(
 // В качестве ответа укажите исправленную строку кода.
 //
 // 🖥 Пример ответа: <Profile userId={4}/>
-//ewqfewf
+
