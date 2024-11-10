@@ -5,6 +5,7 @@ import { appActions, SetAppErrorActionType, SetAppStatusActionType } from "app/a
 import { handleServerAppError, handleServerNetworkError } from "utils/error-utils";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { todoliststaction } from "features/TodolistsList/todolists-reducer";
+import {clearTasksAndTodolists} from "../../common/actions/clearTasksAndTodolists";
 
 const slice = createSlice({
   name: "tasks",
@@ -29,6 +30,9 @@ const slice = createSlice({
         tasksForCurrentTodolist[index] = { ...tasksForCurrentTodolist[index], ...action.payload.model };
       }
     },
+    clearTask:()=>{
+      return {}
+    },
     setTask: (state, action: PayloadAction<{ tasks: TaskType[]; todolistId: string }>) => {
       state[action.payload.todolistId] = action.payload.tasks;
     },
@@ -45,6 +49,9 @@ const slice = createSlice({
         state[tl.id] = [];
       });
     });
+    bilder.addCase(clearTasksAndTodolists.type,()=>{
+      return {}
+    })
   },
 });
 export const tasksReducer = slice.reducer;
