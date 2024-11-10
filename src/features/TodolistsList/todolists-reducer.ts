@@ -1,15 +1,15 @@
-import { todolistsAPI, TodolistType } from "../../api/todolists-api";
-import { Dispatch } from "redux";
-import { appActions, RequestStatusType, SetAppErrorActionType, SetAppStatusActionType } from "../../app/app-reducer";
-import { handleServerNetworkError } from "../../utils/error-utils";
-import { AppThunk } from "../../app/store";
-import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
-import { fetchTasksTC, tasksaction } from "features/TodolistsList/tasks-reducer";
+import {todolistsAPI, TodolistType} from "../../api/todolists-api";
+import {Dispatch} from "redux";
+import {appActions, RequestStatusType} from "../../app/app-reducer";
+import {handleServerNetworkError} from "../../utils/error-utils";
+import {AppThunk} from "../../app/store";
+import {createSlice, current, PayloadAction} from "@reduxjs/toolkit";
+import {fetchTasksTC} from "features/TodolistsList/tasks-reducer";
 import {clearTasksAndTodolists} from "../../common/actions/clearTasksAndTodolists";
-
+const initialState : TodolistDomainType[]=[]
 const slice = createSlice({
   name: "todolists",
-  initialState: [] as TodolistDomainType[],
+  initialState,
   reducers: {
     removeTodolist: (state, action: PayloadAction<{ todolistId: string }>) => {
       const index = state.findIndex((todo) => todo.id === action.payload.todolistId);
@@ -36,12 +36,9 @@ const slice = createSlice({
     setTodolists: (state, actions: PayloadAction<{ todolists: TodolistType[] }>) => {
       return actions.payload.todolists.map((tl) => ({ ...tl, filter: "all", entityStatus: "idle" }));
     },
-    clearTodolists:()=>{
-      return []
-    },
   },
   extraReducers: builder => {
-    builder.addCase(clearTasksAndTodolists.type,()=>{
+    builder.addCase(clearTasksAndTodolists,(state, action)=>{
       return []
     })
   }

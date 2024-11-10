@@ -30,9 +30,6 @@ const slice = createSlice({
         tasksForCurrentTodolist[index] = { ...tasksForCurrentTodolist[index], ...action.payload.model };
       }
     },
-    clearTask:()=>{
-      return {}
-    },
     setTask: (state, action: PayloadAction<{ tasks: TaskType[]; todolistId: string }>) => {
       state[action.payload.todolistId] = action.payload.tasks;
     },
@@ -49,7 +46,7 @@ const slice = createSlice({
         state[tl.id] = [];
       });
     });
-    bilder.addCase(clearTasksAndTodolists.type,()=>{
+    bilder.addCase(clearTasksAndTodolists,(state, action)=>{
       return {}
     })
   },
