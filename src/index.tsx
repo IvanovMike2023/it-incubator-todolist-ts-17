@@ -10,6 +10,9 @@ root.render(
 		<App/>
 	</Provider>
 );
+
+
+//
 // import React, { ChangeEvent, useState } from "react";
 // import ReactDOM from "react-dom/client";
 // import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
@@ -90,10 +93,8 @@ root.render(
 // 		setPassword(e.target.value);
 // 	};
 // 	console.log(isAuth)
-// 	//dispatch(loginTC(email,password))
-//
+// 	dispatch(loginTC(email,password))
 // 	if (isAuth) {
-// 		//dispatch(loginTC(email,password))
 // 		navigate("/profile");
 // 	}
 //
@@ -134,12 +135,6 @@ root.render(
 // И ещё раз: нужно указать не исправленную строку кода, а код, который нужно добавить🙂
 
 
-// 📜 Описание:
-// После старта / обновления приложения мы видим Login, а потом через 3 секунды Profile
-// Но это плохое поведение.
-// Ваша задача написать код при котором пользователя не будет редиректить на Login,
-// пока приложение не проинициализировано,
-// а во время ожидания ответа с сервера он будет видеть Loader
 
 // 🖥 Пример ответа: <Loader/>
 
@@ -198,6 +193,7 @@ root.render(
 //
 // import ReactDOM from 'react-dom/client';
 // import React, { useEffect, useState } from 'react'
+// import {lightGreen} from "@mui/material/colors";
 //
 // export const Mining = () => {
 //     const [btc, setBtc] = useState(0)
@@ -209,11 +205,10 @@ root.render(
 //             setBtc((prevState)=>{
 //                 return prevState+1
 //             })
-//             //console.log(btc)
+//            // console.log(btc)
 //             // ❗❗❗ XXX ❗❗❗
 //         }, 1000)
 //     }, [])
-//
 //     return (
 //         <h1>🪙 BTC: {btc}</h1>
 //     )
@@ -309,9 +304,9 @@ root.render(
 //     const isInitialized = useAppSelector((state) => state.app.isInitialized);
 //     const isLoading = useAppSelector((state) => state.app.isLoading);
 //     const isLoggedIn = useAppSelector((state) => state.app.isLoggedIn);
-// if(!isInitialized && isLoading){
-//     return  <Loader/>
-// }
+// // if(!isInitialized && isLoading){
+// //     return  <Loader/>
+// // }
 //     if (isLoggedIn) {
 //         return <Navigate to={"/"} />;
 //     }
@@ -322,10 +317,8 @@ root.render(
 //     const isInitialized = useAppSelector((state) => state.app.isInitialized);
 //     const isLoading = useAppSelector((state) => state.app.isLoading);
 //     const isLoggedIn = useAppSelector((state) => state.app.isLoggedIn);
-//     //console.log(isInitialized)
-//     //console.log(isLoading)
 //     if (!isLoggedIn) {
-//         return <Navigate to={"/login"} />;
+//         return <Loader/>
 //     }
 //
 //     return <h2>😎 Profile </h2>;
@@ -367,12 +360,12 @@ root.render(
 // а во время ожидания ответа с сервера он будет видеть Loader
 
 // 🖥 Пример ответа: <Loader/>
-
+//
 // import ReactDOM from 'react-dom/client';
 // import React, { useEffect, useState } from 'react'
 // import { BrowserRouter, Route, Routes, useNavigate, useParams } from 'react-router-dom'
 //
-// const newSum = 1000
+// const newSum = 10000
 //
 // const Login = () => {
 //     const navigate = useNavigate()
@@ -393,7 +386,8 @@ root.render(
 //
 //     useEffect( ()=> {
 //         if (params.bonus) {
-//             setBalance(balance+newSum)
+// 			console.log(Number(params.bonus))
+//             setBalance(balance+Number(params.bonus))
 //             // ❗❗❗ XXX ❗❗❗
 //         }
 //     },[] )
